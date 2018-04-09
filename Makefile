@@ -5,25 +5,29 @@
 ## Makefile of the project
 ##
 
-NAME =	
+NAME =	a.out
 
 SRC =
 
 OBJ =	$(SRC:.c=.o)
 
-INC =	-Iinclude \
-	-Ilib/printf/includes
+INC =	-Iinclude 		\
+	-Ilib/printf/includes	\
+	-Ilib/gnl/includes	\
 
-LIB =	./lib/printf/libprintf.a
+LIBPF =	./lib/printf/libprintf.a
 
-LDFLAGS = -Llib/printf\
-	  -lprintf
+LIBGNL= ./lib/gnl/libgnl.a
 
-CFLAGS= $(INC) \
-	-W \
-	-Wall \
-	-Wextra \
-	-Werror
+LDFLAGS = -Llib/printf	\
+	  -lprintf	\
+	  -Llib/gnl	\
+	  -lgnl
+
+CFLAGS= $(INC)	\
+	-W	\
+	-Wall	\
+	-Wextra	\
 
 CC =	gcc
 
@@ -31,17 +35,22 @@ RULE =	all
 
 all:    $(NAME)
 
-$(LIB):
+$(LIBGNL):
+	$(MAKE) -C lib/gnl $(RULE)
+
+$(LIBPF):
 	$(MAKE) -C lib/printf $(RULE)
 
-$(NAME):$(OBJ) $(LIB)
+$(NAME):$(OBJ) $(LIBPF) $(LIBGNL)
 	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 clean:
+	$(MAKE) -C lib/gnl clean
 	$(MAKE) -C lib/printf clean
 	$(RM) $(OBJ)
 
 fclean:	clean
+	$(MAKE) -C lib/gnl fclean
 	$(MAKE) -C lib/printf fclean
 	$(RM) $(NAME)
 

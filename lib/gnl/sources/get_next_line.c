@@ -7,7 +7,7 @@
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "my.h"
+#include "gnl.h"
 
 char *my_gnl_strcat(char *s1, char *s2)
 {
