@@ -1,40 +1,52 @@
-#
+##
 ## EPITECH PROJECT, 2017
 ## Makefile
 ## File description:
-## Makefile
+## Makefile of the project
 ##
 
-SRC	=	sources/main.c			\
+NAME =	
 
-OBJ	=	$(SRC:%.c=%.o)
+SRC =
 
-NAME	=	ai
+OBJ =	$(SRC:.c=.o)
 
-INC	=	-I./include
+INC =	-Iinclude \
+	-Ilib/printf/includes
 
-INC_LIB = 	-I./lib/my/include
+LIB =	./lib/printf/libprintf.a
 
-LIBS	=	-L./lib/my -lmy
+LDFLAGS = -Llib/printf\
+	  -lprintf
 
-CFLAGS	=	$(INC) $(INC_LIB) -Wextra -Wall -Werror
+CFLAGS= $(INC) \
+	-W \
+	-Wall \
+	-Wextra \
+	-Werror
 
-CC	=	gcc
+CC =	gcc
 
-LIB	=	$(MAKE) -C lib/my/
+RULE =	all
 
-all:		$(NAME)
+all:    $(NAME)
 
-$(NAME):	$(OBJ)
-		$(LIB)
-		$(CC) -o $(NAME) $(OBJ) $(LIBS)
+$(LIB):
+	$(MAKE) -C lib/printf $(RULE)
+
+$(NAME):$(OBJ) $(LIB)
+	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 clean:
-		$(RM) -f $(OBJ)
-		$(MAKE) clean -C lib/my/
+	$(MAKE) -C lib/printf clean
+	$(RM) $(OBJ)
 
-fclean: 	clean
-		$(RM) -f $(NAME)
-		$(MAKE) fclean -C lib/my/
+fclean:	clean
+	$(MAKE) -C lib/printf fclean
+	$(RM) $(NAME)
 
-re:		fclean all
+re:	fclean all
+
+dbg:	CFLAGS += -O0 -g
+dbg:	RULE = dbg
+dbg:	re
