@@ -5,7 +5,7 @@
 ** All function which displays in a specific base
 */
 
-#include "my.h"
+#include "printf.h"
 
 int	my_puthexa(int *nbr)
 {

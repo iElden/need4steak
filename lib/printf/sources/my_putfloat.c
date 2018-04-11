@@ -5,7 +5,7 @@
 ** Displays a float with a given decimals number
 */
 
-#include "my.h"
+#include "printf.h"
 
 int	display_dec_part(int dec_part, int decimals)
 {

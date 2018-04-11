@@ -6,10 +6,10 @@
 */
 
 #ifndef __MY_PRINTF_H_
-#define __MY_PRINTF_H_ 1
+#define __MY_PRINTF_H_
 
+#include <stdarg.h>
 #include <stdbool.h>
-#define READ_SIZE 50
 
 int	my_putchar(char c);
 int	my_put_nbr(int nb);
