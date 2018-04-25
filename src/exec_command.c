@@ -7,8 +7,9 @@
 
 #include "gnl.h"
 #include "printf.h"
+#include <stdbool.h>
 
-char	*exec_command(char *cmd, _Bool need_return)
+char	*exec_command(char *cmd, bool need_return)
 {
 	char	buffer;
 
