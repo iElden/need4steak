@@ -5,7 +5,13 @@
 ** Main function of n4s.
 */
 
+#include "functions.h"
+#include <stdlib.h>
+
 int main(void)
 {
-	return (0);
+	exec_command("start_simulation\n", false);
+	ai();
+	exec_command("stop_simulation\n", false);
+	return (EXIT_SUCCESS);
 }

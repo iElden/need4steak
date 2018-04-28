@@ -7,15 +7,17 @@
 
 #include "functions.h"
 #include <stdlib.h>
+#include <string.h>
 
 char	**split(char *str, char c)
 {
 	int	spaces = 0;
 	char	**result = 0;
-	int	start = 0;
 	int	index = 0;
 
-	str = my_strdup(str);
+	if (!str)
+		return (NULL);
+	str = strdup(str);
 	for (int i = 0; str[i]; i++)
 		spaces += str[i] == c;
 	result = malloc((spaces + 2) * sizeof(*result));
