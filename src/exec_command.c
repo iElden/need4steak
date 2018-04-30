@@ -23,7 +23,7 @@ char	*exec_command(char *cmd, bool need_return)
 	my_putstr("Executing command: ", 2);
 	my_putstr(cmd, 2);
 	my_putstr(cmd, 1);
-        buffer = get_next_line(0);
+	buffer = get_next_line(0);
 	if (!buffer)
 		return (NULL);
 	my_putstr(buffer, 2);

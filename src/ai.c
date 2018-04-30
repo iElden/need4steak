@@ -1,4 +1,3 @@
-
 /*
 ** EPITECH PROJECT, 2018
 ** ai
@@ -63,7 +62,7 @@ void	update_car(double *car_lidar, int speed)
 	set_angle(angle);
 }
 
-double	*get_lidar()
+double	*get_lidar(void)
 {
 	char	*result = exec_command("get_info_lidar\n", true);
 	char	**pts = split(result, ':');
