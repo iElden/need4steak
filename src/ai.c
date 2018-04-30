@@ -1,3 +1,4 @@
+
 /*
 ** EPITECH PROJECT, 2018
 ** ai
@@ -23,7 +24,7 @@ int	change_speed(double *lidar)
 	speed = (lidar[15] + lidar[16]) / 2;
 	if (speed < 0 || speed > 1000)
 		speed = (speed < 0 ? 0 : 1000);
-	cmd = concatf("CAR_FORWARD:%f\n", speed / 1500);
+	cmd = concatf("CAR_FORWARD:%f\n", speed / 2200);
 	exec_command(cmd, false);
 	free(cmd);
 	return (speed);
@@ -50,8 +51,8 @@ void	update_car(double *car_lidar, int speed)
 	left = car_lidar[0];
 	right = car_lidar[31];
 	angle = (left - right) * 3.14 / 180 / 64 * (-5.5 * speed / 1000 + 6);
-	if (angle < -1 || angle > 1)
-		angle = (angle > 1 ? 1 : -1);
+	if (angle < -0.25 || angle > 0.25)
+		angle = (angle > 0.25 ? 0.25 : -0.25);
 	set_angle(angle);
 }
 
