@@ -24,7 +24,7 @@ double	change_speed(double *lidar)
 	speed /= 6;
 	if (speed < 0 || speed > 1000)
 		speed = (speed < 0 ? 0 : 1000);
-	cmd = concatf("CAR_FORWARD:%f\n", speed / 2500);
+	cmd = concatf("CAR_FORWARD:%f\n", speed / 2600);
 	exec_command(cmd, false);
 	free(cmd);
 	return (speed);
@@ -54,11 +54,12 @@ void	update_car(double *car_lidar, int speed)
 	for (int i = 27; i < 32; i++)
 		right += car_lidar[i];
 	right /= 5;
-	//left = car_lidar[0];
-	//right = car_lidar[31];
-	angle = (left - right) * 3.14 / 180 / 64 * (-5.5 * speed / 1000 + 6) * (speed < 100 ? 10 : 1);
-	if (angle < (speed < 100 ? -1 : -0.25) || angle > (speed < 100 ? 1 : 0.25))
-		angle = (angle > (speed < 100 ? 1 : 0.25) ? (speed < 100 ? 1 : 0.25) : (speed < 100 ? -1 : -0.25));
+	angle = (left - right) * 3.14 / 180 / 64 * (-5.5 * speed / 1000 + 6) * \
+	(speed < 100 ? 10 : 1);
+	if (angle < (speed < 100 ? -1 : -0.25) || \
+angle > (speed < 100 ? 1 : 0.25))
+		angle = (angle > (speed < 100 ? 1 : 0.25) ? \
+		(speed < 100 ? 1 : 0.25) : (speed < 100 ? -1 : -0.25));
 	set_angle(angle);
 }
 

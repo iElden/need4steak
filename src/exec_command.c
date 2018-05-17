@@ -16,6 +16,14 @@ int	my_putstr(char *str, int fd)
 	return (write(fd, str, strlen(str)));
 }
 
+void	check_finish(char *buffer)
+{
+	if (strstr(buffer, "Track Cleared") != NULL) {
+		free(buffer);
+		exit(EXIT_SUCCESS);
+	}
+}
+
 char	*exec_command(char *cmd, bool need_return)
 {
 	char	*buffer;
@@ -28,6 +36,11 @@ char	*exec_command(char *cmd, bool need_return)
 		return (NULL);
 	my_putstr(buffer, 2);
 	my_putstr("\n", 2);
+	if (strstr(buffer, "KO") != NULL) {
+		free(buffer);
+		exit(EXIT_FAILURE);
+	}
+	check_finish(buffer);
 	if (need_return)
 		return (buffer);
 	free(buffer);
