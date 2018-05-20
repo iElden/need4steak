@@ -73,9 +73,9 @@ double	*get_lidar(void)
 	char	**pts = split(result, ':');
 	double	*points = malloc(32 * sizeof(*points));
 
-	if (pts[35] == NULL)
+	if (pts[35] == NULL ||)
 		exit(EPITECH_FAILURE);
-	if (!points || !pts || strcmp(result, "") == 0) {
+	if (!points || !pts || !result || strcmp(result, "") == 0) {
 		if (pts)
 			free(pts[0]);
 		free(pts);
