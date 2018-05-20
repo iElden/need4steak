@@ -7,6 +7,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 #include "structs.h"
 #include "functions.h"
 #include "macros.h"
@@ -72,7 +73,9 @@ double	*get_lidar(void)
 	char	**pts = split(result, ':');
 	double	*points = malloc(32 * sizeof(*points));
 
-	if (!points || !pts || !result) {
+	if (pts[35] == NULL)
+		exit(EPITECH_FAILURE);
+	if (!points || !pts || strcmp(result, "") == 0) {
 		if (pts)
 			free(pts[0]);
 		free(pts);
