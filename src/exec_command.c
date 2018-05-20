@@ -6,6 +6,7 @@
 */
 
 #include "functions.h"
+#include "macros.h"
 #include <stdbool.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -38,7 +39,7 @@ char	*exec_command(char *cmd, bool need_return)
 	my_putstr("\n", 2);
 	if (strstr(buffer, "KO") != NULL) {
 		free(buffer);
-		exit(EXIT_FAILURE);
+		exit(EPITECH_FAILURE);
 	}
 	check_finish(buffer);
 	if (need_return)

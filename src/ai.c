@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include "structs.h"
 #include "functions.h"
+#include "macros.h"
 #include "concatf.h"
 #include <math.h>
 
@@ -48,6 +49,8 @@ void	update_car(double *car_lidar, int speed)
 	double	right = 0;
 	double	angle = 0;
 
+	if (car_lidar[0] <= 100 || car_lidar[30] <= 100)
+		exit(EPITECH_FAILURE);
 	for (int i = 0; i < 5; i++)
 		left += car_lidar[i];
 	left /= 5;
@@ -69,11 +72,12 @@ double	*get_lidar(void)
 	char	**pts = split(result, ':');
 	double	*points = malloc(32 * sizeof(*points));
 
-	if (!points || !pts) {
+	if (!points || !pts || !result) {
 		if (pts)
 			free(pts[0]);
 		free(pts);
 		free(points);
+		free(result);
 		return (NULL);
 	}
 	for (int i = 0; i < 32; i++)
@@ -86,14 +90,16 @@ double	*get_lidar(void)
 
 void	ai(void)
 {
-	bool	exit = false;
+	bool	quit = false;
 	car_t	car;
 
-	while (!exit) {
+	while (!quit) {
 		car.lidar = get_lidar();
+		if (car.lidar == NULL)
+			exit(EPITECH_FAILURE);
 		car.speed = change_speed(car.lidar);
 		update_car(car.lidar, car.speed);
-		exit = (car.speed == 0);
+		quit = (car.speed == 0);
 		free(car.lidar);
 	}
 }

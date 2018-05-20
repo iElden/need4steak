@@ -9,5 +9,6 @@
 #define _MACROS_H_
 
 #define READ_SIZE (50)
+#define EPITECH_FAILURE (84)
 
 #endif
